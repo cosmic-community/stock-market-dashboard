@@ -22,11 +22,14 @@ export default function DataTable({ stock, historicalData }: DataTableProps) {
   const paginatedData = historicalData.slice(startIndex, startIndex + itemsPerPage)
 
   const handleExportAll = () => {
+    const today = new Date()
+    const exportDate = today.toISOString().split('T')[0] || today.toLocaleDateString('en-CA')
+    
     const csvData = {
       symbol: stock.symbol,
       quote: stock,
       historicalData,
-      exportDate: new Date().toISOString().split('T')[0],
+      exportDate,
     }
     exportToCSV(csvData)
   }
