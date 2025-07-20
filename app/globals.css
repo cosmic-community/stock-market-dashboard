@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  body {
+    @apply bg-dark-bg text-dark-text antialiased;
+  }
+  
+  * {
+    @apply border-dark-border;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-dark-surface border border-dark-border rounded-lg p-6 shadow-lg;
+  }
+  
+  .btn-primary {
+    @apply bg-purple-primary hover:bg-purple-hover text-white font-medium px-4 py-2 rounded-lg transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-dark-surface hover:bg-dark-border text-dark-text font-medium px-4 py-2 rounded-lg border border-dark-border transition-colors duration-200;
+  }
+  
+  .input-field {
+    @apply bg-dark-surface border border-dark-border text-dark-text placeholder-dark-text-secondary rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-primary focus:border-transparent;
+  }
+  
+  .table-header {
+    @apply bg-dark-border text-dark-text font-semibold text-sm uppercase tracking-wider;
+  }
+  
+  .table-cell {
+    @apply text-dark-text border-b border-dark-border;
+  }
+  
+  .profit {
+    @apply text-green-profit;
+  }
+  
+  .loss {
+    @apply text-red-loss;
+  }
+  
+  .chart-container {
+    @apply bg-dark-surface rounded-lg p-4 border border-dark-border;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(26, 26, 26, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-surface;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-border rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-purple-primary;
+}
+
+/* Loading animation */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Chart.js custom styles */
+.chartjs-render-monitor {
+  border-radius: 8px;
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+  .text-responsive {
+    @apply text-sm;
+  }
+}
+
+/* Focus styles */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-purple-primary ring-offset-2 ring-offset-dark-bg;
+}
