@@ -257,16 +257,18 @@ export async function getStockQuote(symbol: string): Promise<StockQuote> {
       if (profile.range && typeof profile.range === 'string') {
         const rangeParts = profile.range.split('-');
         if (rangeParts.length >= 2) {
-          const lowPart = rangeParts[0]?.trim();
-          const highPart = rangeParts[1]?.trim();
+          const lowPart = rangeParts[0];
+          const highPart = rangeParts[1];
           
-          if (lowPart) {
-            const lowValue = Number(lowPart);
+          if (lowPart !== undefined) {
+            const trimmedLowPart = lowPart.trim();
+            const lowValue = Number(trimmedLowPart);
             if (!isNaN(lowValue)) fiftyTwoWeekLow = lowValue;
           }
           
-          if (highPart) {
-            const highValue = Number(highPart);
+          if (highPart !== undefined) {
+            const trimmedHighPart = highPart.trim();
+            const highValue = Number(trimmedHighPart);
             if (!isNaN(highValue)) fiftyTwoWeekHigh = highValue;
           }
         }
