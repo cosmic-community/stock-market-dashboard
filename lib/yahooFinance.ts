@@ -108,7 +108,7 @@ export async function getHistoricalData(
       close: quotes.close?.[index] || 0,
       volume: quotes.volume?.[index] || 0,
       adjClose: adjClose?.[index] || quotes.close?.[index] || 0,
-    })).filter(point => point.close > 0); // Filter out invalid data points
+    })).filter((point: HistoricalDataPoint) => point.close > 0); // Filter out invalid data points
 
     return historicalData;
   } catch (error) {
