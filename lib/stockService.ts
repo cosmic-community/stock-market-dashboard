@@ -249,6 +249,21 @@ export async function getStockQuote(symbol: string): Promise<StockQuote> {
     
     if (Array.isArray(data) && data.length > 0) {
       const profile = data[0];
+      
+      // Parse range safely with proper null checks
+      let fiftyTwoWeekLow = fallbackQuote.fiftyTwoWeekLow;
+      let fiftyTwoWeekHigh = fallbackQuote.fiftyTwoWeekHigh;
+      
+      if (profile.range && typeof profile.range === 'string') {
+        const rangeParts = profile.range.split('-');
+        if (rangeParts.length >= 2) {
+          const lowValue = Number(rangeParts[0]?.trim());
+          const highValue = Number(rangeParts[1]?.trim());
+          if (!isNaN(lowValue)) fiftyTwoWeekLow = lowValue;
+          if (!isNaN(highValue)) fiftyTwoWeekHigh = highValue;
+        }
+      }
+      
       return {
         symbol: profile.symbol || upperSymbol,
         shortName: profile.companyName || `${upperSymbol} Inc.`,
@@ -262,8 +277,8 @@ export async function getStockQuote(symbol: string): Promise<StockQuote> {
         forwardPE: fallbackQuote.forwardPE,
         dividendYield: profile.lastDiv || fallbackQuote.dividendYield,
         beta: profile.beta || fallbackQuote.beta,
-        fiftyTwoWeekLow: profile.range?.split('-')[0] ? Number(profile.range.split('-')[0]) : fallbackQuote.fiftyTwoWeekLow,
-        fiftyTwoWeekHigh: profile.range?.split('-')[1] ? Number(profile.range.split('-')[1]) : fallbackQuote.fiftyTwoWeekHigh,
+        fiftyTwoWeekLow,
+        fiftyTwoWeekHigh,
         currency: profile.currency || 'USD',
         exchange: profile.exchangeShortName || 'NASDAQ',
         sector: profile.sector || 'Technology',
