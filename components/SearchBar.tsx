@@ -1,13 +1,15 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { StockSearchResult } from '@/types'
 
 interface SearchBarProps {
   onSearch: (symbol: string) => void
+  onSearchSuggestions?: (query: string) => Promise<StockSearchResult[]>
   loading: boolean
 }
 
-export default function SearchBar({ onSearch, loading }: SearchBarProps) {
+export default function SearchBar({ onSearch, onSearchSuggestions, loading }: SearchBarProps) {
   const [query, setQuery] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
