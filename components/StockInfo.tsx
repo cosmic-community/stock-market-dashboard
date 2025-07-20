@@ -1,7 +1,7 @@
 'use client'
 
 import { StockQuote } from '@/types'
-import { formatCurrency, formatNumber } from '@/lib/yahooFinance'
+import { formatCurrency, formatNumber } from '@/lib/stockService'
 
 interface StockInfoProps {
   stock: StockQuote

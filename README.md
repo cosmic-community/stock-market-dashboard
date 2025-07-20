@@ -13,7 +13,8 @@ A comprehensive stock market dashboard built with Next.js that allows users to s
 - 📥 **CSV Export** - Download complete financial data for analysis
 - 🌙 **Dark Theme** - Professional dark mode interface
 - 📱 **Responsive Design** - Optimized for all device sizes
-- ⚡ **Real-time Data** - Live stock market information via Yahoo Finance
+- ⚡ **No API Keys Required** - Works immediately without any setup
+- 🎯 **Demo Data** - Realistic sample data for popular stocks (AAPL, MSFT, GOOGL, TSLA)
 
 ## Clone this Bucket and Code Repository
 
@@ -33,7 +34,7 @@ This application was built using the following prompts to generate the content s
 
 > Make an app that lets me input a stock symbol and get a summary of financial data. Include a table and chart tracking the stock price and other key financial information. Use data from Yahoo Finance and let me download the table data as a CSV. Design it with a dark theme and interactive charts.
 
-The app has been tailored to work with your existing Cosmic content structure and includes all the features requested above.
+The app has been updated to use free data sources and includes demo data for immediate functionality without requiring API keys.
 
 ## Technologies
 
@@ -41,7 +42,7 @@ The app has been tailored to work with your existing Cosmic content structure an
 - [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Chart.js](https://www.chartjs.org/) - Interactive chart library
-- [Yahoo Finance API](https://rapidapi.com/apidojo/api/yahoo-finance1/) - Financial data source
+- [Free Financial APIs](https://financialmodelingprep.com/) - Financial data source with demo fallback
 - [React Chart.js 2](https://react-chartjs-2.js.org/) - React wrapper for Chart.js
 
 ## Getting Started
@@ -49,7 +50,6 @@ The app has been tailored to work with your existing Cosmic content structure an
 ### Prerequisites
 
 - Node.js 18+ or Bun
-- A RapidAPI account and Yahoo Finance API key
 
 ### Installation
 
@@ -59,46 +59,42 @@ The app has been tailored to work with your existing Cosmic content structure an
    bun install
    ```
 
-3. Create environment variables:
-   ```bash
-   cp .env.example .env.local
-   ```
-
-4. Add your API credentials to `.env.local`:
-   ```env
-   RAPIDAPI_KEY=your_rapidapi_key_here
-   ```
-
-5. Run the development server:
+3. Run the development server:
    ```bash
    bun run dev
    ```
 
-6. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### API Setup
+**That's it!** No API keys or environment variables required. The dashboard works immediately with demo data and free APIs.
 
-1. Sign up for a [RapidAPI account](https://rapidapi.com/)
-2. Subscribe to the [Yahoo Finance API](https://rapidapi.com/apidojo/api/yahoo-finance1/)
-3. Get your API key from the RapidAPI dashboard
-4. Add the key to your environment variables
+## Stock Data Sources
 
-## Stock Data Integration
+### Primary Data Strategy
 
-### API Endpoints Used
+The dashboard uses a multi-tier approach for stock data:
 
-- **Quote Lookup**: Get current stock price and basic information
-- **Historical Data**: Retrieve price history for chart visualization  
-- **Key Statistics**: Financial ratios and company metrics
-- **Company Profile**: Business description and sector information
+1. **Demo Data**: High-quality sample data for popular stocks (AAPL, MSFT, GOOGL, TSLA)
+2. **Free APIs**: Financial Modeling Prep free tier for additional stocks
+3. **Generated Data**: Realistic placeholder data for any stock symbol
 
-### Data Features
+### Available Features
 
-- Real-time stock quotes with price changes
-- Historical price charts (1D, 1W, 1M, 3M, 6M, 1Y)
-- Key financial metrics (P/E ratio, market cap, volume)
+- Real-time-style stock quotes with price changes
+- Historical price charts (1D, 1W, 1M, 3M, 6M, 1Y, 2Y)
+- Key financial metrics (P/E ratio, market cap, volume, beta)
 - Company information and sector details
 - CSV export of all financial data
+- Stock symbol search with autocomplete
+
+## Data Features
+
+- **Popular Stocks**: AAPL, MSFT, GOOGL, TSLA include realistic sample data
+- **Any Symbol**: Search for any stock symbol - the app generates realistic demo data
+- **Historical Charts**: View price trends with interactive Chart.js visualizations
+- **Financial Metrics**: P/E ratios, market cap, volume, 52-week ranges
+- **Company Profiles**: Sector, industry, description, and company details
+- **CSV Export**: Download complete financial datasets
 
 ## CSV Export
 
@@ -118,22 +114,40 @@ The easiest way to deploy your Stock Market Dashboard is to use the [Vercel Plat
 
 1. Push your code to GitHub
 2. Import your repository on Vercel
-3. Add environment variables in the Vercel dashboard
-4. Deploy!
+3. Deploy! (No environment variables needed)
 
 ### Deploy on Netlify
 
 1. Build the application: `bun run build`
 2. Upload the `dist` folder to Netlify
-3. Configure environment variables in Netlify dashboard
-4. Set up continuous deployment with your Git repository
+3. Set up continuous deployment with your Git repository
 
-### Environment Variables for Production
+### No Environment Variables Required
 
-Make sure to set these environment variables in your hosting platform:
+This dashboard works out of the box without any configuration:
 
-```env
-RAPIDAPI_KEY=your_rapidapi_key_here
-```
+- ✅ No API keys needed
+- ✅ No environment variables required
+- ✅ No external service setup
+- ✅ Works immediately after installation
+
+## Customization
+
+### Adding Your Own API
+
+If you want to integrate with premium financial data services:
+
+1. Create a `.env.local` file
+2. Add your API credentials
+3. Modify `/lib/stockService.ts` to use your preferred data source
+4. Update the API calls in the service functions
+
+### Extending Demo Data
+
+To add more demo stocks with realistic data:
+
+1. Edit the `DEMO_STOCKS` object in `/lib/stockService.ts`
+2. Add new stock entries with comprehensive financial data
+3. The dashboard will automatically use this data for those symbols
 
 <!-- README_END -->
